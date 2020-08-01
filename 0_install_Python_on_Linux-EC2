@@ -1,0 +1,84 @@
+Install python on Linux-Ec2?
+----------------------------
+
+Step1:	https://www.python.org/downloads/source/
+
+step2:	select which version do you want to install & copy the link(right click & copy link) of "Gzipped source tarball" of that version
+
+step3:	SSH in to your EC2
+	
+	-check whether wget is installed or not	--> which wget
+
+	-if not installed, install wget		--> yum install wget -y
+
+
+step4: install python .tar version (you have already copied it from the official python's website)
+
+	--> wget https://www.python.org/ftp/python/3.7.0/Python-3.7.0.tgz    (copied link from website)
+
+step5: unzip/untar the installed python
+
+	--> tar -xvf  Python-3.7.0.tgz
+
+step6:	To work with python we need some extra dependencies, so install them
+
+	--> yum install gcc openssl-devel bzip2-devel libffi-devel -y
+
+step7:	go to installed,(untared) python and run configure
+
+	--> cd Python-3.7.0
+  	--> ./configure
+
+step:8	run a command make to compile the code of installed python
+
+	--> make
+
+step9:	install python
+	--> make altinstall  		(here "alt" in altinstall--> if you have already installed any other version of python in the system the latest installation will not disturb that old version of python)
+
+
+
+step10:	by default it will be installed in the location /usr/local/bin/
+
+	--> ls -lrt /usr/local/bin/
+
+
+step:11	to run/make it work your latest python add/export /usr/local/bin PATH to ~/.bashrc file.
+	--> echo "PATH=\$PATH:/usr/local/bin" >> ~/.bashrc
+	--> export PATH=$PATH:/usr/local/bin
+
+
+step12: make a soft copy to the python3.7  (because to create a short name instead of using python3.7 for easy-use-case purpose.)
+ 	cd /usr/local/bin
+	ln -s python3.7 python3
+	ln -s pip3.7 pip3
+
+
+step13: Now you have Successfully installed Python3.7 on Linux-Ec2 Machine
+	
+	Test:
+		search anywhere from the Machine
+		
+			python3 --version	(gives python version)
+
+			pip --version		(gives pip version)
+
+
+
+Only Commands here:
+-------------------
+
+yum install wget -y
+wget https://www.python.org/ftp/python/3.7.0/Python-3.7.0.tgz
+tar -xvf  Python-3.7.0.tgz
+yum install gcc openssl-devel bzip2-devel libffi-devel -y
+cd Python-3.7.0
+./configure
+make
+make altinstall
+echo "PATH=\$PATH:/usr/local/bin" >> ~/.bashrc
+export PATH=$PATH:/usr/local/bin
+cd /usr/local/bin
+ln -s python3.7 python3
+ln -s pip3.7 pip3
+
